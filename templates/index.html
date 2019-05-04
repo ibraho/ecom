@@ -1,0 +1,352 @@
+{%extends 'base.html'%}
+{%load static %}
+  {% block content %}
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+  <link href= "{% static "css/owl.carousel.min.css" %}" rel="stylesheet">
+  <link href= "{% static "css/owl.theme.default.min.css" %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
+  <script src="{% static "js/owl.autoplay.js" %}"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou" rel="stylesheet"><script>
+  $(document).ready(function() {
+
+if ( $('body').scrollTop() > $('.us').position.top ) {
+    //$('.menu-items').removeClass('selected');
+    $('.u').addClass('selected');
+
+}
+
+    //$('#navio').addClass('animated slideInDown')
+   $('.ps').find('.item').attr('data-aos', 'zoom-in');
+  $('.ps').find('.item').find('p').attr({'data-aos': 'zoom-in','data-aos-duration':"1000",
+    'data-aos-easing':"ease-in-out",
+    'data-aos-mirror':"true"});
+  });
+</script>
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<svg class="animated slideInDown svgt" style="margin-top: 3.8rem;" version="1.1" id="lay1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="0 0 1903 100" style="enable-background:new 0 0 1903 100;" xml:space="preserve">
+<style type="text/css">
+  .st0{stroke:#000000;stroke-miterlimit:10;}
+</style>
+<polygon class="st0" points="-0.5,0.5 951.5,98.5 1903.5,0.5 "/>
+</svg>
+
+<style>
+
+button:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0), 0 10px 10px rgba(0, 0, 0, 0);
+}
+.brand img{
+  max-height: 250px;
+
+}
+ .brand2 img{
+  max-height: 250px;
+  max-width: 200px!important;
+
+}
+
+@media only screen and (max-width: 750px) {
+ .brand2 img {
+  max-height: 250px;
+  max-width: 300px!important;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+    }
+}
+
+@media only screen and (max-width: 990px) {
+ .i h3{
+ margin-top: 1rem;
+
+
+}
+}
+@media only screen and (max-width: 600px) {
+.r{
+ padding: 0px!important;
+}
+#lay1{
+  margin-top: 0.2rem!important;
+}
+}
+
+.owl-next,.owl-prev:hover{
+  color: red;
+}
+.owl-prev {
+    width: 25px;
+    height: 70px;
+    position: absolute;
+    top: 25%;
+    margin-left: 0px;
+    display: block !important;
+    border:0px solid black;
+}
+
+.owl-next {
+    width: 25px;
+    height: 70px;
+    position: absolute;
+    top: 25%;
+    right: 0px;
+    display: block !important;
+
+}
+.vb p{
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+.ps .item:hover{
+    background: url(static/img/test4.svg) no-repeat top left;
+  background-size: contain;
+  background-color: #e8e8e8;
+  border-radius: 15px;
+}
+.owl-prev i, .owl-next i {transform : scale(2,9); color:#959fb3;}
+.i{
+ /* background-color: #e8e8e8;*/
+  height: 250px;
+  margin-right:
+}
+.i h3{
+  font-family: 'Luckiest Guy', cursive;
+  margin-top: 0.7rem;
+
+
+}
+.i p{
+  margin-top: 1rem;
+  font-family: 'ZCOOL QingKe HuangYou', cursive;
+  font-size: 23px;
+  position: relative;
+  padding-bottom: 20px;
+}
+.i:hover{
+      background: url(static/img/test4.svg) no-repeat top left;
+  background-size: contain;
+  box-shadow: 0 14px 25px rgba(0,0,0,0.25), 0 10px 7px rgba(0,0,0,0.22);
+}
+.i{
+  height: 120%;
+}
+
+.icons{
+  background-image: url('static/img/ite3.png') ;background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+}
+.prices{
+    background-image: url('static/img/ite1.png') ;background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+}
+.paypal{
+    background-image: url('static/img/ite2.png') ;background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+}
+.top img{
+  max-height: 700px;
+  max-width: 9000px;
+}
+.r{
+ padding: 0px 100px 0px 100px;
+}
+footer{margin-top: 0rem;}
+
+.us{
+  margin:0px 10% 0px 10%;
+}
+.us p{
+  margin-top: 2rem;
+}
+</style>
+
+
+<div class="r">
+
+
+
+
+<div class="carousel-wrap mt-5">
+  <div class="top owl-carousel">
+    <div class="item"><img src="static/img/top1.png"></div>
+    <div class="item"><img src="static/img/top2.png"></div>
+  </div>
+</div>
+
+</div>
+
+
+
+ <hr>
+ <div class="cus"></div>
+<div  class=" text-center us">
+  <h2 style="  font-family: 'Luckiest Guy', cursive;">Why us?</h2>
+
+  <div class="row">
+
+    <div data-aos="zoom-in"  class="col-md-4  i">
+      <h3>Create Profile</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur  adipisicing elit. Illum, ea quisquam illo quibusdam placeat a voluptatibus voluptas,lorem eveniet aliquam eligendi? Cumque eos, possimus fugit dignissimos mollitia neque dicta sequi architecto!</p>
+     <div data-aos="zoom-in"  data-aos-delay="50"
+    data-aos-duration="1000"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true" class="icons">
+
+        </div>
+    </div>
+    <div data-aos="zoom-in"  class="col-md-4 i ">
+      <h3>Easy shopping</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, ea quisquam illo quibusdam placeat a voluptatibus voluptas, eveniet aliquam eligendi? Cumque eos, possimus fugit dignissimos mollitia neque dicta sequi architecto!</p>
+     <div data-aos="zoom-in"  data-aos-delay="50"
+    data-aos-duration="1000"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true" class="prices">
+
+        </div>
+    </div>
+      <div data-aos="zoom-in"     class="col-md-4 i">
+        <h3>Safe Payment</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, ea quisquam illo quibusdam placeat a voluptatibus voluptas, eveniet aliquam eligendi? Cumque eos, possimus fugit dignissimos mollitia neque dicta sequi architecto!</p>
+        <div data-aos="zoom-in"  data-aos-delay="50"
+    data-aos-duration="1000"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true" class="paypal">
+
+        </div>
+      </div>
+  </div>
+</div>
+ <hr>
+
+<div class="carousel-wrap mt-5 text-center">
+    <h2 style="  font-family: 'Luckiest Guy', cursive;">Shop By Category</h2>
+
+
+  <div class="brand vb ps owl-carousel">
+    <div  class="item"><a href="{% url "ecom:index"  %}subcat/laptops/"><img src="static/img/p1.png"><p >Laptop</p></a></div>
+    <div class="item"><a href="{% url "ecom:index"  %}subcat/gaming-pc/"><img src="static/img/p2.png"><p>Gaming Pc</p></a></div>
+
+    <div class="item"><a href="{% url "ecom:index"  %}subcat/tablets/"><img src="static/img/p3.png"><p>Tablet</p></a></div>
+
+    <div class="item"><a href="{% url "ecom:index"  %}all/smart-watches/"><img src="static/img/pn.png"><p>Smart Watches</p></a></div>
+
+    <div class="item"><a href="{% url "ecom:index"  %}all/gaming-accessories/"><img src="static/img/p5.png"><p>Gaming Accessories</p></a></div>
+    <div class="item"><a href="{% url "ecom:index"  %}subcat/monitor-and-tv/"><img src="static/img/op.jpg"><p>Monitor</p></a></div>
+
+
+
+  </div>
+</div>
+<div class="carousel-wrap mt-5">
+  <div class="brand2 text-center vb owl-carousel">
+    <div class="item"><img src="static/img/b1.png"></div>
+    <div class="item"><img src="static/img/b2.png"></div>
+
+    <div class="item"><img src="static/img/b3.png"></div>
+
+    <div class="item"><img src="static/img/b4.png"></div>
+
+    <div class="item"><img src="static/img/b5.png"></div>
+    <div class="item"><img src="static/img/b6.png"></div>
+    <div class="item"><img src="static/img/b7.png"></div>
+    <div class="item"><img src="static/img/b8.png"></div>
+
+
+  </div>
+</div>
+
+
+
+
+
+<script>
+jQuery(document).ready(function($) {
+
+$(".i").hover(function() {
+  $('#svg').hide();
+
+});
+
+
+$('.top').owlCarousel({
+  loop: true,
+   items: 1,
+    loop:true,
+    margin:0,
+    singleItem:true,
+
+})
+
+
+
+
+
+
+    $('.brand2').owlCarousel({
+  loop: true,
+  margin: 0,
+  nav: true,
+  navText: [
+    "<i class='fa fa-caret-left'></i>",
+    "<i class='fa fa-caret-right'></i>"
+  ],
+  //autoplay: true,
+  autoplayHoverPause: true,
+  responsive: {
+    0: {
+      items: 1
+    },
+    600: {
+      items: 3
+    },
+    1000: {
+      items: 7
+    }
+  }
+})
+
+
+    $('.brand').owlCarousel({
+  loop: true,
+  margin: 20,
+  nav: true,
+  navText: [
+    "<i class='fa fa-caret-left'></i>",
+    "<i class='fa fa-caret-right'></i>"
+  ],
+  //autoplay: true,
+  autoplayHoverPause: true,
+  responsive: {
+    0: {
+      items: 1
+    },
+    600: {
+      items: 3
+    },
+    1000: {
+      items: 5
+    }
+  }
+})
+
+});
+
+
+</script>
+
+
+
+{%endblock%}

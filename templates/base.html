@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Ecomerce</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href= "{% static "css/base.css" %}" rel="stylesheet">
+  <link href= "{% static "css/animate.css" %}" rel="stylesheet">
+ 
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+
+
+
+</head>
+<style type="text/css">
+
+
+</style>
+
+
+<script>
+function myFunct(x) {
+  x.classList.toggle("change");
+ 
+}
+
+
+</script>
+
+
+ 
+{% load i18n %}
+
+
+<body>
+
+
+
+
+ <style type="text/css">
+ @media only screen and (min-width: 600px) {
+
+}
+@media only screen and (max-width: 600px) {
+
+}
+footer {
+ margin-top: 4rem;
+
+  width: 100%;
+  background-color: black;
+  border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.inf div {
+  width: 50px;
+  height: 50px;
+text-align: center;
+background-color: white;
+border-radius: 50%;
+      margin-left: 8px;
+
+}
+.inf div i {
+      margin-top: 8px;
+      font-size: 30px;
+}
+.inf{
+
+  height: 70px;
+
+}
+.line{
+  margin-top: 1.5rem; border-bottom-style: solid;border-bottom-color: #ffffff;border-bottom-width: 3px;
+}
+.is{
+  margin: 0px!important;
+  padding: 0px!important;
+}
+ 
+@media only screen and (min-width: 770px) {
+  #categ:hover #cat{
+ display: block!important;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+
+.inf {
+     margin-top: 10px;
+      
+}
+}
+.cc p{
+  margin-left: 15px;
+}
+.footer p{
+color:#c3c3c3;
+  font-family: 'Baloo Thambi', cursive;
+}
+.footer h3{
+color:white;
+}
+.footer h3{
+  font-family: 'Luckiest Guy',;
+}
+#cat{
+      margin-top: 0px;
+}
+.ins:hover{
+color: red;
+
+
+}
+.fac:hover  {
+color: blue;
+
+}
+.goog:hover  {
+color: green;
+
+
+}
+.fuo h3{
+  margin-top: 3rem;
+}
+
+  #vabi{
+  position: fixed;
+  left: 0px;
+  width:100%;
+  height:100%;
+  z-index: 9999;
+  background: url('{% static "img/loading.gif" %}') center no-repeat #3c3c3c;
+}
+
+</style>
+  {%if form%}
+<style type="text/css">
+    #favi{
+        display: none;
+    }
+</style>
+    {% endif %}
+   
+
+
+<div  style="" class=" " id='navi'>
+
+  <nav id="navio" class=" shift navbar  navbar-expand-lg navbar-dark bg-dark
+  fixed-top">
+
+      
+  {% for emailaddress in user.emailaddress_set.all %}
+
+
+{% if emailaddress.verified %}
+    {% else %}
+<a  class="mr-1" style="text-decoration: none; color: red;" href="{% url 'account_email' %}">Verify-<span style="font-size:17px;color: green; font-weight: bold;">{{ emailaddress.email }}</span></a>
+      
+         {% endif %}
+
+  {% endfor %}
+
+  <a class="navbar-brand" href="{% url 'ecom:index' %}">Ecomerce</a>
+
+  <div   class="sample nine ">
+  <form   method="GET" action="" id="favi" >
+  <input  style =' height: 100%; 'id="cas" class="cv" type="text" name="search" value="{{request.GET.search}}" placeholder="Search product or category">
+<button style="border-radius: 50%; height: 40px;width: 40px;" value="Search" type="submit" class="btn btn-search mr-2 ksav">
+    <i style="" class="fa fa-search"></i>
+  </button>
+
+
+
+  </form>
+
+</div>
+
+  <button   style="background-color:black;border-style: none;" onclick="myFunct(this)" class="va navbar-toggler" type="button" >
+            <div class="cp" ">
+  <div class="bar1"></div>
+  <div class="bar2"></div>
+  <div class="bar3"></div>
+</div>
+  </button>
+
+  <div class="collapse navbar-collapse nac" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    
+      <li class="nav-item active">
+        <a class="nav-link v" href="#2">Dilivery</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-item active nav-link v " href="{% url 'ecom:index' %}">Home</a>
+      </li>
+
+     <li id="categ" class="nav-item dropdown  ">
+        <a  class="  nav-item active nav-link  buto v cax" href="#" >Categories
+        </a>
+        <!-- Example split danger button -->
+
+       
+<script>
+$(document).ready(function(){
+ $(".va").click(function(){
+        $("#navbarSupportedContent").toggle('slow');
+
+    });
+ 
+    $(".buto").click(function(){
+        $(".cat").toggle();
+
+    });
+        $(".ik").each(function(){
+           $(this).click(function(){
+           var ul = $(this).parent('ul').children('li');
+           ul.toggle('slow');
+             
+           });
+
+    });
+
+});
+
+    $(document).ready(function() {
+        
+          $('#vabi').css("background-image", "url()");
+          $('#vabi').attr('id','mx')
+
+
+
+
+     
+    });
+
+</script>
+                
+
+
+ <ul id="cat"  class=" cat  active  dropdown-menu as ">
+       {% for nav in  cate %}
+
+   
+<ul class="mn" style="padding: 0; list-style: none;">
+
+  <button class="ik" style="position: absolute;margin-left: 0px;"> <i class=" fas fa-caret-down"></i>  </button>
+  <a  type="button" class=" ml-1  dropdown-item h vbn " href="{% url 'ecom:all_products' %}{{nav.slug}}/" > {{nav.name}}</a>
+  
+                  {% for sub in  nav.sub_category.all %}
+                  <li style="display: none;" class="gh ">
+                      <a style=" background-color: #02567d;color: white;" class="  dropdown-item  " href="{% url 'ecom:index' %}subcat/{{sub.slug}}"><i class="fas fa-caret-right"></i> {{sub.name}}</a>
+                      {%endfor%}
+                        </li>  
+</ul>
+
+
+
+
+
+
+                  
+       
+      
+
+   
+{%endfor%}
+
+
+        </ul>
+      </li>
+    </ul>
+         <ul class="navbar-nav ml-auto">
+            <li class=" nav-item active">
+
+              <a class=" nav-link v cart" id=""  href="{% url 'ecom:index' %}cart/">
+             <button class="animated shad " id='carta'>{{ cart|length }}</button> <i class="fa fa-shopping-cart" style="font-size:21px"></i>
+           My cart</a></li>
+
+
+  
+           {% if user.is_authenticated %}
+             <li class=" nav-item active"><a class=" nav-link v" id="out"  href="{% url 'ecom:index' %}accounts/signup/"><i class='far fa-user' style='font-size:21px'></i> {{user.username|capfirst}}</a></li>
+        {% else %}
+            <li class=" nav-item active"><a class=" nav-link v" id="out"  href="{% url 'ecom:index' %}accounts/signup/">Sing Up</a></li>
+        <li  class="nav-item active"><a class="nav-link v " id="log"  href="{% url 'ecom:index' %}accounts/login/"><i class="glyphicon glyphicon-user"></i>Login</a></li>
+        {% endif %}
+
+          
+           <div class="btn-group">
+      {% if user.is_authenticated %}
+
+           <li  data-toggle="modal" data-target="#exampleModal" class="nav-item active "><a class=" v nav-link text-center" id="log2"  href="#"><i class="glyphicon glyphicon-user"></i>Log Out</a></li>
+
+
+
+        {% endif %}
+  </div>
+</div>
+  </ul>
+
+  </div>
+
+   </nav>
+
+  </div>
+ 
+
+
+
+
+
+
+
+{% block content %}
+
+{%endblock%}
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+
+
+</style>
+
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<!-- Footer -->
+<div class="fusko" >
+<svg style="position: relative;border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+ top:6.9px;
+ left:0px;" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="0 0 1903 100" style="enable-background:new 0 0 1903 100;" xml:space="preserve">
+<polygon points="0.5,100 951.5,2 1902.5,100 "/>
+</svg>
+<footer style="margin-top: 0px;" class="footers" >
+
+<div  class="container-fluid footer fuo">
+   <div class="row">
+     <div class="col-sm-6">
+       <h3>About US</h3>
+       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro corporis soluta neque, ea alias quia provident, molestias ratione aut esse placeat beatae sequi sed laudantium consectetur culpa eius. Exercitationem, dicta.</p>
+     </div>
+        <div class="col-sm-3  ">
+       <h3>Choose Us</h3>
+       <div class=" cc   row"><p>Our Brands</p></div>
+       <div class=" cc row"><p>Contact Us</p></div>
+       <div class="cc row"><p>Our Payment</p></div>
+       <div class=" cc row"><p>Our Partners</p></div>
+
+     </div>
+        <div class="col-sm-3">
+       <h3>Terms of Use</h3>
+       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro corporis s </p>
+     </div>
+   </div>
+<div class=" row">
+  <div  class="col-md-9 is ">
+    <div id="line" class="line "></div>
+  </div>
+
+<div class="col-md-3">
+     <div  class="row inf ">
+    
+     <div class="ins"><i class="fab fa-instagram"></i></div>
+     <div class="fac"><i class="fab fa-facebook-f"></i></div>
+     <div class="goog"><i class="fab fa-google"></i></div>
+
+   </div>
+
+</div>
+</div>
+
+
+</div>
+</footer>
+</div>
+   <script type="text/javascript">
+
+$(document).ready(function(){
+
+      
+   
+});
+$("#log2").click(function() {
+$(".logjasht").toggle("slow")
+
+});
+
+</script> 
+ 
+      <div style="display: none;" id="footer"  class="navbar-nav fixed-bottom  fund mt-5 ">
+ 
+
+
+
+      </div>
+   
+   
+<!-- Footer -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{user.username|capfirst}} you are about to singn out</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+     {% load i18n %}
+
+
+
+
+
+<h4>{% trans 'Are you sure you want to sign out?' %}</h4>
+<p class="text-center">{% trans ' Your products saved on cart will be lost' %}</p>
+
+<form method="post" action="{% url 'account_logout' %}">
+  {% csrf_token %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+  {% endif %}
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">{% trans 'Sign Out' %}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!---  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+  <script>
+    AOS.init();
+  </script>
+  
+</body>
+</html>

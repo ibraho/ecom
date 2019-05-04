@@ -1,0 +1,251 @@
+
+.show2{
+  position: absolute;  height: 50px;
+  width: 50px; margin:8px 0px 0px 0px;border-radius: 50%;
+}
+.m2{
+  margin-top: 20px;border-color: #b5e4e3;
+   border-style: solid;max-width: 300px;
+}
+.orderdd{
+
+
+background-color:black;
+}
+body{
+    
+  background-color: #b0b0b0;
+  height: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.close{
+  color: red;
+
+  border-radius: 50%;
+  justify-content: center;
+  text-align: center;
+  top: 0;
+
+}
+.close:hover{
+background-color: #b3b3b3;
+  color: red;
+}
+.modal-title{
+  font-family: 'Luckiest Guy',;
+  font-weight: bold;
+}
+
+.fade h4 {
+  font-weight: bold;
+
+  font-family: 'Luckiest Guy',;
+}
+.aa{
+  min-height: 200px;
+ /* max-height: 600px!important; */
+  overflow-y: auto;
+  background-color: black!important;
+}
+.cap{
+  background-color: white!important;
+
+}
+.remov{
+  position: absolute;
+  margin:0px 0px 700px 0px;
+  position: -webkit-sticky;
+}
+.titl{
+  text-align: center; 
+  color: black;background-color: #b9b9b9;;
+   padding: 0px 25px 0px 25px; font-size: 120%;
+  font-size: 25px;
+}
+.che{
+  color: #fbbd62;
+}
+@media only screen and (max-width: 780px) {
+  .remov{
+  position: absolute;
+  margin:0px 0px 0px 0px;
+  
+}
+
+   .sec{
+    margin-top:10px;
+   }
+}
+
+a{
+  text-decoration: none!important;
+}
+.sec{
+  background-color: #e3fbfd;
+}
+.form2 label{
+  display: none;
+}
+
+#photo-clear_id{
+  display: none;
+}
+{
+  margin-right: 2rem; 
+}
+#id_photo{
+  max-width: 200px;
+}
+.form1 input{
+  border-style: solid;
+  border-color: #b5e4e3;
+
+}
+.form1,.form2{
+
+  border-style: solid;
+  border-color: #b5e4e3;
+  padding:10px 40px 0px 20px;
+}
+#id_birth_date{
+
+  width:100%;
+  margin-right: 5px;
+}
+.pho,.mail,.last,.name,.zip,.birth,.loca{
+  margin: 0px 0px 0px 300px;
+  font-size: 25px;
+  padding: 0px;
+  position: absolute;
+  display: none;
+}
+strong{
+  text-align: right;
+  
+}
+img{
+  height: 250px;
+}
+.bn-info.focus, .btn-info:focus {
+    box-shadow:none;
+}
+.bn{
+  border-radius: 10px;
+}
+.bn:focus {
+    box-shadow:none;
+}
+
+
+button:focus {
+    outline: none;
+    outline: none;
+}
+.icons{
+  position: ;
+  max-height: 50px;
+  max-width: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.ic{
+}
+.one {
+  animation-duration: 3s;
+  animation-delay: 0s;
+}
+.two {
+  animation-duration: 3s;
+  animation-delay: 1s;
+}
+.thre {
+  animation-duration: 3s;
+  animation-delay: 2s;
+}
+.four {
+  animation-duration: 3s;
+  animation-delay: 3s;
+}
+.four {
+  animation-duration: 3s;
+  animation-delay: 3s;
+}
+
+.product{
+  border-radius: 15px;
+  background-color: #e3fbfd;
+  margin-bottom: 50px;
+}
+.titles{
+  text-align: center;
+  border-radius: 35px;
+}
+.ico{
+width: 100%!important;
+height: 90px!important;
+margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 780px) {
+
+.ico{
+
+
+  margin-top: 0px!important;
+  position:relative!important ;
+  margin-right: 2px!important;
+padding: 10px;
+
+}
+.comands{
+margin-top:0.5rem !important;
+margin-bottom: 0.5rem !important;
+
+
+}
+
+}
+
+.shad{
+  box-shadow: 0 14px 25px rgba(0,0,0,0.25), 0 10px 7px rgba(0,0,0,0.22);
+}
+
+.comands{
+margin-top:6rem;
+padding: 0px!important;
+
+}
+.ico{
+  position:absolute; ;
+  max-height: 50px;
+  width: 110px;
+}
+.ones {
+  animation-duration: 3s;
+  animation-delay: 0s;
+  margin:  0px 0px 0px 0px;
+}
+.twos {
+  animation-duration: 3s;
+  animation-delay: 1s;
+  margin:  50px 0px 0px 0px;
+
+}
+.thres {
+  animation-duration: 3s;
+  animation-delay: 2s;
+  margin:  100px 0px 0px 0px;
+
+}
+.fours {
+  animation-duration: 3s;
+  animation-delay: 3s;
+  margin:  150px 0px 0px 0px;
+
+}
+.monq{
+  margin-top: 5rem!important;
+}

@@ -1,0 +1,572 @@
+{% extends "base.html" %}
+{% load static %}
+{% load mathfilters %}
+{% load crispy_forms_tags %}
+  {% block content%}
+
+<link rel="stylesheet" href="{% static "css/detail.css" %}"> 
+
+  <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <script src="{% static "js/jquery.zoom.min.js" %}"></script>
+
+<style type="text/css">
+</style>
+
+<div class=" container-fluid  mt-5 ">
+	
+  <div class="row ">
+
+  <div class="col-md-5">
+    
+  <div style="margin: auto; padding-bottom: 0px!important; " class="mt-5 shows" >
+    <img   id= "zog"  style="max-height: 350px;" src="{{post.photo.url}}" class="w-100 animated">
+</div>
+
+<div class="carousel-wrap sil  text-center">
+    
+
+  <div class="brand vb ps owl-carousel">
+
+        {% for ph in image%}
+            <div  class="item col"><img  src="{{ph.image.url }}"></div>
+    
+
+       {% endfor %}
+  
+
+    
+  </div>
+
+    </div>
+    </div>
+
+
+<div id="mnk"> </div>
+ <style>
+   #mnk select{
+    display: block!important;
+   }
+ </style>
+ <script type="text/javascript">
+
+
+  
+$(document).ready(function() {
+var fsua= $('#faso').attr('action');
+
+
+
+   var cold= $("#id_colors").val()
+   //$('#id_color').val(cold)
+   var colid= $("#id_extras").val()
+  // $('#id_extra').val(colid)
+   
+
+    $("#id_colors").change(function(){
+   var col= $(this).val()
+   var colido= $("#id_extras").val()
+   $('#id_color').val(col)
+   $('#faso').attr('action','/one_order/'+post+'/'+col+'/'+colido+'/');
+  });
+
+
+    $("#id_extras").change(function(){
+   var coli= $(this).val()
+   var coldo= $("#id_colors").val()
+
+   $('#id_extra').val(coli)
+   $('#faso').attr('action','/one_order/'+post+'/'+coldo+'/'+coli+'/');
+  });
+
+
+var post= '{{post.id}}';
+if (typeof cold === 'undefined') {
+    $('#faso').attr('action','/one_order/'+post+'/');
+}
+else {
+  $('#faso').attr('action','/one_order/'+post+'/'+cold+'/'+colid+'/');
+}
+
+if (typeof colid === 'undefined') {
+  $('#id_extra').val('Not set');
+    
+}
+
+});
+
+ $(function() {
+  var $select = $('#id_quantity');
+  var pricon= "{{ post.price }}";
+
+   //var new= item*producct_price;
+  $select.on('change', function() {
+       
+    var value = parseInt($('#id_quantity').val());
+    var item_price=parseInt(pricon);
+    var newp= value * "{{ post.price }}";
+     $('#total').text(newp+'$');
+
+
+  });
+
+
+});
+
+
+
+
+</script>
+
+<div  class=" mt-5  tex col-md-5 car"  >
+
+  
+<form action="{% url "cart:cart_add" post.id %}" id="fdd" method="POST">
+ {% csrf_token %}
+
+ {{ cart_product_form|crispy }}
+
+
+
+
+ <div class="price"> Price per item <strong>{{ post.price|make_list|slice:'-3'|join:'' }}$</strong></div>
+
+<div>Total <strong id="total"> </strong></div>
+
+</form>
+{% if color %}
+<select class="bnv" id="id_colors">
+{% for colore in color %}
+  <option value="{{colore.color|capfirst}}">{{colore.color|capfirst}}</option>
+
+
+{% endfor %}
+</select>
+{% endif %}
+
+{% if extra_choice %}
+<select class="bnv" id="id_extras">
+{% for choice in extra_choice %}
+  <option value="{{choice.product_extra_choice|capfirst}}">{{choice.product_extra_choice|capfirst}}</option>
+
+
+{% endfor %}
+</select>
+{% endif %}
+<hr>
+{% if cart %}
+
+<button  for="fdd" style="transform: skewX(-10deg);" type="submit" class="btn btn-warning  cart_on  shad  "><i class="fa fa-shopping-cart" style="font-size:24px; "></i> Add to Cart</button>
+  {% for item in cart %}
+                {% with prod=item.post %} 
+                             {% if prod.id == post.id %}
+
+  <button   onclick="event.preventDefault()" for="fdd" style="transform: skewX(-10deg);" type="submit" class="btn btn-warning  shad  "><i class="fas fa-check-circle" style="color: green; font-size:22px"></i> On Cart</button>
+<style>
+  
+.cart_on{
+  display: none;
+}
+
+</style>     
+
+                                      {% endif %}
+                           {% endwith %}
+               {% endfor %}
+      {% else %}
+<button  for="fdd" style="transform: skewX(-10deg);" type="submit" class="btn btn-warning  cart_on  shad  "><i class="fa fa-shopping-cart" style="font-size:24px; "></i> Add to Cart</button>
+
+  {% endif %}
+
+
+
+
+
+<form style="display: inline-block;transform: skewX(-10deg);" id="faso{{forloop.counter}}" action=""  method="POST">
+
+  {% csrf_token %}
+  
+
+
+  <button name="one_order"  style="margin:0rem 0rem 0rem 0rem;"  class="btn btn-warning  sub shad" ><i style="font-size: 20px;" class="fas fa-credit-card"></i> Buy just One </button>
+
+
+
+      </form>
+
+
+<style>
+
+
+  .bn{display: none;}
+
+.asteriskField{display: none;}
+.control-label{font-weight: }</style>
+<div class="text-center" style="font-weight: 600;color:white;border-color: white;box-shadow:10px 10px  20px #00000054;border-style: solid;background-color: black;">
+
+
+
+  <div class="reduce" >
+
+ {% if post.price_before > post.price %}
+  <i >Was</i> <i style=" text-decoration: line-through ;color: red;" >  {{ post.price_before|make_list|slice:'-3'|join:''}}$</i>
+{% endif %}
+
+ 
+
+
+
+
+{% if post.price_before > post.price %}
+<span class="s_span" >
+ 
+
+
+
+    <i> <i >Save</i> {{ post.price_before|sub:post.price|make_list|slice:'-3'|join:'' }}$</i>
+    </span>
+{% endif %}
+
+<span>
+</div>
+
+
+  	       <p class="text-center" style="font-size: 120%;"  > 
+
+
+           {{post.discription1|safe}}</p>
+                          </div>
+          
+             </div>
+</div>
+
+</div>
+
+<div class=' test mt-5 ml-2' >
+  
+<div style=" position: relative;z-index: 55;top: 3px;" class="mnj">
+  
+<span class="btn  desc border " > Item description </span>
+<span  class="btn   rev "  > Users feedbacks </span>
+
+
+</div>
+<style>
+  .show-more-height{
+    overflow: hidden;
+    height: 250px;
+  }
+</style>
+<div class="container-fluid">
+ 
+  <div class="row ">
+  <div  class="  col-12 cae ">
+
+<div class=" tvu show-more-height">
+  <p class="text-center">{{post.discription2|safe}}</p>
+</div>
+<button style=" background-color: #807e7e;; font-weight: 700;" class=' btn show-more mt-1'>Show More </button>
+  </div>
+  
+  <script>
+        $(".show-more").click(function () {
+        if($(".tvu").hasClass("show-more-height")) {
+            $(this).text("Show Less");
+        } else {
+            $(this).text("Show More");
+        }
+
+        $(".tvu").toggleClass("show-more-height");
+    });
+  </script>
+  <!-- feedbacks of products begin --> 
+  
+<div class="container-fluid ratings " >
+
+
+
+
+
+
+
+{% for rated in feedback.all %}
+
+  {% if rated.rate > 0  %}
+<style>
+  .xero{
+    display: none;
+  }
+</style>
+<script type="text/javascript">
+  $(document).ready(function($) {
+
+//var nn= $('#rat'+'{{ rated.rate}}').attr('id');
+$('#{{forloop.counter}}'+'rat'+'{{ rated.rate}}').children('span:lt({{rated.rate}})').addClass('checked');
+    
+ 
+  });
+
+  </script>
+<div  class="row fano animated ml-2 mt-2">
+
+<script>
+
+
+var url_on=$('#image_id'+'{{forloop.counter}}').attr('src');
+console.log(url_on)
+     $.get('{{rated.profile.photo.url}}')
+    .done(function() { 
+       
+    }).fail(function() { 
+        
+  $('#image_id'+'{{forloop.counter}}').attr('src', '/static/img/unknown.png');
+
+    })
+</script>
+
+  <img id="image_id{{forloop.counter}}" style="border-radius: 50%;height: 80px;width: 80px;"  src="{{rated.profile.photo.url}}" alt="">
+<span> {{rated.profile.user}}   
+
+
+<div style="font-weight: 900;" class="rate" val='{{ rated.rate}}' id="{{forloop.counter}}rat{{ rated.rate}}">{{rated.rate}}/5
+  
+  <span class="fa fa-star" data-value='1'></span>
+  <span class="fa fa-star" data-value='2'></span>
+  <span class="fa fa-star" data-value='3'></span>
+  <span class="fa fa-star" data-value='4'></span>
+  <span class="fa fa-star" data-value='5'></span>
+
+</div>
+
+<p style="font-size: 20px;">{{rated.feedback}}</p>
+
+</span>
+
+
+</div>
+
+
+{% endif %}
+{% endfor %}
+
+
+{% for rated in feedback.all|slice:'1' %}
+
+ {% if rated.rate == 0 or feedback == empty %}
+  
+<style>
+
+</style>
+<div class="container text-center xero">
+  <div style="margin:35px;" class='text-center mt-3' > <strong style="font-size: 20px; color: black;background-color: white;padding: 8px;">No Feedbacks !</strong> </div>
+</div>
+
+{% endif %}
+
+{% empty %}
+<style>
+
+</style>
+<div class="container text-center xero">
+  <div style="margin:35px;" class='text-center mt-3' > <strong style="font-size: 20px; color: black;background-color: white;padding: 8px;">No Feedbacks !</strong> </div>
+</div>
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+</div>
+</div>
+</div>
+
+  <!-- feedbacks of products begin --> 
+
+  <!-- similar products begin -->	
+  <div class="similar mt-2 vb ps text-center owl-carousel">
+
+{%  for slid in similar_post%}
+        <div class="up container text-center">
+
+ <span style="position: absolute;z-index: 4;left: 0px;top: 40px;">
+            
+
+<form style="display: none;" id="rem{{slid.id}}" class="wish2 " method="POST" action="/remove_wish/{{slid.id}}">
+                            {% csrf_token %}
+                            <input type="hidden" name="supporttype" />
+                            <button  class="remove1 animated shad btn " type="submit"><i style="color: red!important;" class="  fas fa-heart"></i></button> </form>
+     
+
+<form id="{{slid.id}}" class="wish" method="POST" action="">
+                            {% csrf_token %}
+                                  <input type="hidden" name="supporttype" />
+                                <button class="add1 animated shad btn" type="submit"><i class="animated fas fa-heart"></i></button> </form>
+                          
+
+ {% if slid in request.user.profile.wish.all %}
+ <script type="text/javascript">
+
+  $(document).ready(function($) {
+
+    var no= '{{slid.id}}'
+  
+    $("#"+no).attr('action','/remove_wish/'+ no);
+    $("#rem"+no).css('display','block')
+    $("#"+no).css('display','none')
+
+  });
+
+ 
+ </script>
+
+
+{%else%}
+ <script type="text/javascript">
+      $(document).ready(function($) {
+
+    var no= '{{slid.id}}'
+  
+$("#"+no).attr('action','/add_wish/'+ no)
+    $("#rem"+no).css('display','none')
+    $("#"+no).css('display','block')
+    
+  });
+   
+ </script>
+ {%endif%}
+
+
+<script type="text/javascript">
+    $('.formos').click(function(e){
+
+$('#carta').addClass('bounceIn')
+setTimeout(function(){
+$('#carta').removeClass('bounceIn')
+
+}, 500);
+
+      });
+
+
+
+  $(document).ready(function($) {
+       var no= '{{slid.id}}'
+      $('#rem'+no).click(function(event){
+
+         $('#'+no).toggle();
+         $(this).hide();
+
+
+               });
+  
+      $('#'+no).click(function(event){
+
+         $('#rem'+no).toggle();
+         $(this).hide();
+         
+
+      });
+  });
+   
+ </script>
+
+
+
+ </span>
+
+<span style="position: absolute;z-index: 3;left: 0px;" >
+  
+
+<form action="{% url "cart:cart_add" slid.id %}" id="fddd{{slid.id}}" class=" slideo slideos{{slid.id}}" method="POST">
+
+ {% csrf_token %}
+
+ {{ cart_product_form|crispy }}
+
+
+
+
+{% if cart %}
+
+
+  {% for item in cart %}
+                {%  with prod=item.post %} 
+                             {% if prod.id == slid.id %}
+
+  <button   onclick="event.preventDefault()" for="fddd{{slid.id}}" style="z-index: 9; position: absolute; " type="submit" class="btn btn-warning  shad {{prod.id}} {{slid.id}} "><i class="fas fa-check-circle" style="color: green; font-size:22px"></i> On Cart</button>
+    
+<script>
+
+$(document).ready(function(){
+
+  $('#fddd{{slid.id}}').attr('action','Not');
+  var tv= $('#fddd{{slid.id}}').find('.add');
+  tv.hide();
+
+});
+
+</script>
+
+
+{%else%}
+
+
+
+
+<button   style="position: absolute;" type="submit" class="btn btn-warning {{prod.id}} {{slid.id}} cart_ons  add shad  "><i class="fa fa-shopping-cart" style="font-size:24px; "></i> Add </button>
+                                      {% endif %}
+                              {% endwith %}
+                 {% endfor %}
+      {% else  %}
+<button  style="" type="submit" class="btn btn-warning  cart_ons  shad  "><i class="fa fa-shopping-cart" style="font-size:24px; "></i> Add </button>
+
+  {% endif %}
+
+</form>
+
+
+</span>
+
+<a href="{{ slid.get_absolute_url }}">
+
+   
+            <div  class="item col"><img  src="{{slid.photo.url}}"></div>
+
+
+<div class="mnos"><span style="font-size: 17px;">{{ slid.title|capfirst}}</span> -<span style="color:black;background-color: white;"><strong>-{{slid.price|make_list|slice:'-3'|join:''}}<span style="font-size: 17px;">$</span>-</strong></span>
+   </div>
+  </a>
+      </div>   
+
+{% endfor %}
+
+
+  </div>
+
+
+  <!-- similar products ends  --> 
+
+
+
+
+</div>
+
+	
+</div>
+
+
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+  <link href= "{% static "css/owl.carousel.min.css" %}" rel="stylesheet">
+  <link href= "{% static "css/owl.theme.default.min.css" %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
+  <script src="{% static "js/owl.autoplay.js" %}"></script>
+   <script src="{% static "js/detail.js" %}"></script>
+ {% endblock %}
+ </body>
+ </html>

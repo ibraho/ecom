@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load mathfilters %}
+
+<style>
+	
+table td{
+	padding: 0px 0px 0px 0px !important;
+	font-family: 'Luckiest Guy', cursive;
+}
+#total{
+	float: none;
+
+justify-content: center;
+text-align: center;
+padding-bottom: 50px;
+}
+h2{
+	margin-top: 5rem;
+	text-align: center;
+}
+.ima{
+	display:none;
+}
+.fuo h3{
+	margin-top: 3rem;
+}
+</style>
+<div class="container">
+	
+<h2 style="font-family: 'Luckiest Guy', cursive;font-weight: 900">You have created an Order with ID-{{order.id}}</h2>
+<button class="shad shuo btn" >Show Images</button>
+ <table class="table table-hover  mt-5 shopping-cart-wrap  ">
+				 <thead>
+				 <tr>
+				 <th class="ima" >Image</th>
+				 <th>Product Name</th>
+				 <th   class="q"  >Quantity</th>
+				 <th>Product Price</th>
+				 <th>Total price</th>
+		
+				 </tr>
+ </thead>
+ <tbody>
+					{% for ord in order.items.all %}
+				 <tr>
+						 
+
+						 <td class="ima" ><img  style="height: 100px;  ; " class="img-fluid sva      " alt="Responsive image"  src="{{ord.product.photo.url }}" ></td>
+						 <td> {{ord.product.title}}</td>
+						 <td> {{ord.quantity}}</td>
+						 <td> {{ord.product.price}}$</td>
+						 <td> x ({{ord.quantity}}) {{ord.product.price|mul:ord.quantity}}$</td>
+
+                         
+						 {% endfor %}
+						 </tr>
+ </tbody>
+ </table>
+
+</div>
+<div id="total"><h4 class="mt-5">
+	<p>Total</p> {{order.get_total_cost}}$</h4>
+{{ form.render }}
+
+</div>
+<script>
+	$(document).ready(function () {
+	
+	$('.shuo').click(function(event) {
+	$('.ima').toggle('slow');
+var el  = $('.shuo');    
+el.text(el.text() == 'Hide Images' ? 'Show Images' : 'Hide Images');
+	});
+			});
+</script>
+{% endblock %}

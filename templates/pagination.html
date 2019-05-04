@@ -1,0 +1,158 @@
+
+
+<div class="container ">
+ {% if post.has_other_pages %}
+   
+
+  <ul class="pagination justify-content-center ">
+    {% if post.has_previous %}
+      <li><a id="previo" class="page-link shad " href="?page={{ post.previous_page_number }}
+        {%if request.GET.reduced%}&reduced={{request.GET.reduced}}{%endif%}{%if request.GET.high%}&high={{request.GET.high}}{%endif%}
+        {%if request.GET.search%}&search={{request.GET.search}}{%endif%}
+      {%if request.GET.number%}&number={{request.GET.number}}{%endif%}
+        {%if request.GET.low%}&low={{request.GET.low}}{%endif%}
+        {%if request.GET.mini%}&mini={{request.GET.mini}}{%endif%}
+        {%if request.GET.maxi%}&maxi={{request.GET.maxi}}{%endif%}">❮</a></li>
+    
+    {% endif %}
+    {% for i in post.paginator.page_range|slice:":5" %}
+      {% if post.number == i %}
+     
+      <li   class="page-item active"><a class="page-link shad " href="">{{ i }}</a></li>
+        
+      {% else %}
+        <li ><a  class="page-link numbe shad" href="?page={{i}}{%if request.GET.reduced%}&reduced={{request.GET.reduced}}{%endif%}
+          {%if request.GET.high%}&high={{request.GET.high}}{%endif%}
+          {%if request.GET.search%}&search={{request.GET.search}}{%endif%}
+          {%if request.GET.low%}&low={{request.GET.low}}{%endif%}
+{%if request.GET.number%}&number={{request.GET.number}}{%endif%}          
+          {%if request.GET.mini%}&mini={{request.GET.mini}}{%endif%}
+        {%if request.GET.maxi%}&maxi={{request.GET.maxi}}{%endif%}">{{ i }}</a></li>
+      
+      {% endif %}
+    {% endfor %}
+    {% if post.has_next %}
+    {% if post.paginator.num_pages > 5 %}
+    
+{% for c in post.paginator.page_range|slice:'5:' %}
+      {% if post.number == c %}
+       
+      <li   class="page-item active  "><a class="page-link numbe shad" href="">-{{ c }}-</a></li>
+
+
+   {% endif %}
+    {%endfor%}
+   
+<li><a class="page-link page-item active shad  " href="?page={{post.paginator.num_pages}}">❯{{ post.paginator.num_pages}}</a></li>
+    
+
+
+    {%endif%}
+ 
+            
+      <li><a id="next" class="page-link shad" href="?page={{ post.next_page_number }}{%if request.GET.reduced%}&reduced={{request.GET.reduced}}{%endif%}
+        {%if request.GET.high%}&high={{request.GET.high}}{%endif%}
+        {%if request.GET.search%}&search={{request.GET.search}}{%endif%}
+{%if request.GET.number%}&number={{request.GET.number}}{%endif%}
+        {%if request.GET.low%}&low={{request.GET.low}}{%endif%}
+        {%if request.GET.mini%}&mini={{request.GET.mini}}{%endif%}
+        {%if request.GET.maxi%}&maxi={{request.GET.maxi}}{%endif%}">❯</a></li>
+    
+
+  
+        {% endif %}
+    
+  </ul>
+
+{% endif %}
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+if($('.numbe')){
+ $('.numbe').each(function() {
+   
+ 
+var stris =$(this).attr('href');
+var nes = stris.replace(/\s+/g, '');
+
+$(this).attr('href',nes);
+
+});
+}
+
+
+    if ($('#previo').attr('href')) {
+var stri =$('#previo').attr('href');
+var nei = stri.replace(/\s+/g, '');
+//alert(ne)
+$('#previo').attr('href',nei);
+}
+if ($('#next').attr('href')) {
+var str =$('#next').attr('href');
+var ne = str.replace(/\s+/g, '');
+//alert(ne)
+$('#next').attr('href',ne);
+
+}
+  });
+
+</script>
+
+<style >
+.page-item:first-child .page-link {
+    margin-left: 0;
+   border-top-left-radius: 50%; 
+   border-bottom-left-radius: .25rem;
+}
+.page-item:last-child .page-link {
+     border-top-right-radius: 50%; 
+    border-bottom-right-radius: .25rem;
+}
+.pagination li:hover{
+  
+transform: scale(1.1); /* Standard syntax */
+  transition: all .5s;
+}
+.page-link{
+  font-weight: bold;
+}
+.page-link:hover{
+  color:black!important;
+}
+.pagination{
+   
+    margin:5px;
+
+
+  }
+li{
+  padding: 3px;
+}
+.pagination a {
+ color: #061421;
+  padding:15px;  
+  height: 50px;
+  width:50px; 
+  border-radius: 50%;
+} 
+
+.pagination a:hover:not(.active) {background-color: #DCDCDC}
+@media  (max-width: 800px) {
+    .pagination{
+
+   padding: 0px 0px 0px 0px; 
+}
+
+ 
+.pagination a {
+    background-color:#F0F8FF;
+ padding:10px;
+
+   
+  
+}
+
+}
+</style>
+

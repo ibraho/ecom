@@ -1,0 +1,1024 @@
+
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+{% load static%}
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+</head>
+<body>
+
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+{% load mathfilters %}
+
+
+{% block content %}
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+  <link href= "{% static "css/owl.carousel.min.css" %}" rel="stylesheet">
+  <link href= "{% static "css/owl.theme.default.min.css" %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
+  <script src="{% static "js/owl.autoplay.js" %}"></script>
+  <link href= "{% static "css/profile.css" %}" rel="stylesheet">
+<style type="text/css">
+
+
+</style>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var sax= $('#formi1');
+
+        $('.remove1').each(function(event) {
+          $(this).click(function(event) {
+          var list = $('#listi').text();
+          var list_int = parseInt(list);
+
+          $('#listi').text( list_int - 1);         
+
+          });
+    });
+
+    $('.formos').each(function() {
+
+//updates the items number on the cart 
+$(this).one('click', function(event) {
+ var svg = $(this).parent('form').children('div').children('div').children('select');
+
+     var cart= $('#carta').text()
+     var cart_int= parseInt(cart)
+     var drop_int= parseInt( svg.val() )
+
+    $('#carta').text(cart_int + drop_int )
+});
+  });
+  });
+
+</script>
+
+<div style='margin-top: 5rem!important;' class=" ">
+
+<script>
+
+
+
+
+     $.get('{{user.profile.photo.url }}')
+    .done(function() { 
+        // Do something now you know the image exists.
+  
+    }).fail(function() { 
+        // Image doesn't exist - do something else.
+  $('#image_id').attr('src', '/static/img/unknown.png');
+
+    })
+</script>
+
+
+
+  <div  class=" py-3 container-fluid ">
+    <div class="container-fluid ">
+      <div  class="row ">
+        <div style="background-color: black;  border-radius: 25px; height: 300px; margin-right: 5px;"  class="sec col-md-3 text-center  shad">
+          
+    <button style="" class="btn btn-primary show2   "> <i id="ed" class='far fa-images'></i><i style="display: none;" id="cir" class="far fa-times-circle"></i></button>
+
+            <img id="image_id" style="border-radius: 25px;background-color: white; max-width: 100%;" src="{{user.profile.photo.url }}" class="mt-2 shad " >
+
+       
+ <div class="d-flex justify-content-center  ic">
+   
+         <button  class=" shad one btn btn-primary icons"><i class="fas fa-heart"></i></button>
+        
+        <button  class=" shad  two btn btn-info icons"><i class="fas fa-cart-arrow-down"></i></button>
+             
+             <button  class=" shad thre btn btn-info icons"><i class="fab fa-facebook-square"></i></button>
+                 
+                  <button  class= " shad  four btn btn-info icons"><i class="fab fa-google"></i></button>
+ </div>
+
+
+         </div>
+          <div style="border-radius: 25px;" class=" shad animated flipInY sec col-md-8 px-3">
+            <div  class=" card-block px-3">
+              <h4 style="" class="  shad  titles animated pulse card-title">Hello {{the_tim}}
+
+               {% if request.user.profile.name%}
+
+{{request.user.profile.name|capfirst}}
+
+{%else%}
+{{request.user.username}} <i style="font-size: 17px; color:#3bb17f;">(username)</i>
+{% endif %}
+              </h4>
+               {% for emailaddress in user.emailaddress_set.all %}
+
+
+    {% if emailaddress.verified %}
+<h4  style="" class="card-text"> Your verified primary email 
+ <strong >{{request.user.email}}</strong> 
+           <a href="{% url 'account_email' %}">
+          <button class="bn  shad  btn btn-secondary" style="font-size:17px">Change</button></a>
+  </h4>
+                                                                                                         
+
+
+    {% else %}
+<a  class="offset1 " style="text-decoration: none; color: red; font-weight:bold;" href="{% url 'account_email' %}">Please verify - 
+  <span style="font-size:17px;color: green; font-weight: bold;">
+    {{ emailaddress.email }}
+  </span>  otherwise you will not be able to change your password <button class="bn  shad btn-primary btn">Verify</button>
+
+</a>
+      
+      {% endif %}
+
+  {% endfor %}
+
+<div class="mt-2 ">
+              <a href="{% url 'account_email' %}">
+                     <button class="bn shad btn-primary btn" style="  font-size:17px">Email <i class="far fa-envelope"></i></button>
+               </a>
+          
+        <a href="{% url 'account_change_password' %}">
+                    <button class="bn  btn-primary shad btn"   style="font-size:17px">Password <i class="fas fa-unlock-alt"></i>
+                  </button>
+            </a>
+</div>
+      <form style="display:none; "  id="perfoto" enctype="multipart/form-data"  method="POST" class="  shad  form2 mt-2"  required>
+                  {% csrf_token %}
+                  {{ photo_form}}
+                  <button  style="height: 40px;
+  width: 40px; border-radius: 50%; " aligin='center' for='perfoto' name="btnform2" class="btn  btn-success  "  type="submit"><i class="fas fa-check"></i></button>
+                </form>
+
+
+                <div class=""> 
+<button style="position: absolute; margin:0px 0px 0px 235px;" class="show1 bn btn-info "> <i id="edo" class='fas fa-edit'></i> <i style="display: none; " class="far fa-times-circle" id="ciro"></i> Edit</button>
+
+<div  class="m2 shad" style=" ">
+ <span class="d-flex justify-content-center"><strong> Your Adress:</strong></span>
+
+<div  class="info  shad  container-fluid">
+
+            <div class="row">First Name:   <strong class="col ">{{request.user.profile.name }}</strong></div>
+            <div class="row">Last Name:    <strong class="col">{{request.user.profile.last_name }}</strong></div>
+
+            <div class="row">Birth Date:   <strong  class="col">{{ user.profile.birth_date }}</strong></div>
+            <div class="row">Address:       <strong  class="col">{{ request.user.profile.location }}</strong></div>
+            <div class="row">Zip Code:     <strong  class="col">{{request.user.profile.zipcode }}</strong></div>
+            <div class="row">Phone number: <strong  class="col">{{ user.profile.phone }}</strong></div>
+
+            </div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+<div  class="container-fluid mt-1 ">
+    <div class="row ">
+     
+              <form style="display:none; margin-bottom:4rem; " id="forms"   method="POST" class=" form1  shad  ">
+              {% csrf_token %}
+            
+              {{ profile_form|crispy }}
+              <button  style="margin-left: 8rem;" name="btnform1" class="btn btn-primary  " type="submit">Save </button>
+            </form>
+       </div>
+</div>
+                 </div>
+               </div>
+
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div   class="container-fluid  "> 
+
+
+
+                    <div class="row">
+
+
+
+   <div style=""  class="col-md-2 d-flex justify-content-center comands">
+    <button  class=" shad  ones btn btn-info ico wishedd ">
+      <i class="fas fa-heart"></i> Wish List [ <span id='listi'>{{request.user.profile.wish.all|length}}</span> ]</button>
+        
+        <button style="margin-left:15px;" class="  shad  twos btn btn-info ico orderdd"><i class="fas fa-cart-arrow-down"></i> Orders [ <span id="order_count">{{my_orders.count}}</span> ]</button>
+             
+   
+
+
+</div>
+
+    <div   class="first  aa shad text-center  product col-md-8">
+                      
+
+<div style="display: none;"   class="wished">
+{% for po in request.user.profile.wish.all %}
+            <div  id="div{{po.id}}" class="container mt-4 " style="">
+              <hr style="border-top: 1px solid black;">
+              <div class=" down animated slideInDown">
+    <h3 id="{{po.title|capfirst }}" class="titl "> {{po.title|capfirst  }} <span style="color:black;background-color: white;"><strong>-{{po.price|make_list|slice:'-3'|join:''}}<span style="font-size: 19px;">$</span>
+    -</strong></span> </h3></div>
+        <div  "   class="  row cap ">
+    
+<div class="col-md-4 ani text-center animated slideInLeft">
+
+               <a style=" border-radius: 10px;" class="post_url" href="{{ po.get_absolute_url }}">
+                <span class="p_span" style="">
+
+
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+
+       var no= '{{po.id}}'
+
+      $('#rem'+no).click(function(event){
+
+         $('#'+no).toggle();
+         $('#div'+no).hide('slow');
+
+
+               });
+  
+  
+  });
+   
+ </script>
+
+
+
+
+  <img id="{{po.price}}" style="max-height: 300px; " class="img-fluid sva   shad   " alt="Responsive image" style=" box-shadow:10px 10px 5px #00000054;  " src="{{po.photo.url }}" >
+                   
+
+</a>
+
+
+
+                                
+        </div><!-- / -->
+<style type="text/css">
+ .whole #id_quantity{display: block;}
+
+</style>
+
+
+ <div id="{{forloop.counter}}"  style="background-color: white; " class=" anud animated slideInRight col-md-8 muc whole shad">
+
+
+    <div style=""> <p>{{po.discription1|safe|truncatewords:'35' }}</p> </div>
+<div class="row">
+
+<style>
+#id_color,#id_extra{display: none;}
+.control-label{display: none;}
+#div_id_color{display: none;}
+#div_id_quantity label{
+  display: none;
+}
+
+
+  
+
+.asteriskField{display: none;}
+.control-label{font-weight: }
+
+select{
+  border-color: black;
+  border-width: 3px;
+}
+ </style>
+ <script type="text/javascript">
+
+
+  
+$(document).ready(function() {
+var loop_id='{{forloop.counter}}'
+var parent = '{{forloop.counter}}';
+var form_id=$('#formi'+loop_id)
+
+var by_now =$('#faso'+parent)
+   var cold= $(".id_on_color"+loop_id).val();
+   form_id.find('.special_color').val(cold)
+   var colid= $(".id_on_extra"+loop_id).val();
+   form_id.find('.special_extra').val(colid)
+  
+  by_now.attr('action','/one_order/'+post+'/'+cold+'/'+colid+'/');
+
+    $(".id_on_color"+loop_id).change(function(){
+   var colido= $(".id_on_extra"+loop_id).val();
+   var col= $(this).val()
+   form_id.find('.special_color').val(col)
+   by_now.attr('action','/one_order/'+post+'/'+col+'/'+colido+'/');
+  });
+
+
+    $(".id_on_extra"+loop_id).change(function(){
+   var coli= $(this).val()
+   var coldo= $(".id_on_color"+loop_id).val();
+   form_id.find('.special_extra').val(coli)
+   by_now.attr('action','/one_order/'+post+'/'+coldo+'/'+coli+'/');
+  });
+
+
+var post= '{{po.id}}';
+if (typeof cold === 'undefined') {
+    by_now.attr('action','/one_order/'+post+'/');
+    form_id.find("#div_id_color").find('.textinput').val('Not set')
+ 
+   form_id.find("#div_id_extra").find('.textinput').val('Not set')
+}
+else {
+  by_now.attr('action','/one_order/'+post+'/'+cold+'/'+colid+'/');
+}
+
+
+
+if (typeof cold === 'undefined') {
+    by_now.attr('action','/one_order/'+post+'/');
+    
+    form_id.find('.special_color').val('Not set')
+
+    
+}
+
+
+
+if (typeof colid === 'undefined') {
+    by_now.attr('action','/one_order/'+post+'/');
+
+    form_id.find('.special_extra').val('Not set')
+    
+}
+
+ 
+console.log(cold)
+});
+</script>
+
+
+
+     <form  id="formi{{forloop.counter}}" class="add_form anotherdiv_id_quantity " style=" margin: 0px ;" action="{% url "cart:cart_add" po.id  %}"  method="post">
+
+ {% csrf_token %}
+           {{ cart_product_form|crispy }}
+
+            {% if po.post_color.all %}
+<select class="bnv id_on_color{{forloop.counter}}" id="id_colors">
+{% for colore in po.post_color.all %}
+  <option value="{{colore.color|capfirst}}">{{colore.color|capfirst}}</option>
+
+
+{% endfor %}
+</select>
+{% endif %}
+
+
+{% if po.post_text.all %}
+<select class="bnv id_on_extra{{forloop.counter}}" id="id_extras">
+{% for choice in po.post_text.all %}
+  <option value="{{choice.product_extra_choice|capfirst}}">{{choice.product_extra_choice|capfirst}}</option>
+
+
+{% endfor %}
+</select>
+{% endif %}
+
+            <div id='{{ po.price }}' class="price"> Price per item <span style="font-weight: bold">{{ po.price }}$</span></div>
+<div>Total <strong class="total" >{{ po.price }} </strong>$</div>
+  
+          {% if cart %}
+
+<button id="hid" style=" " type="submit" value="Update" class="btn btn-warning mb-3 shad sub formos"><i class="fas fa-cart-plus" style="font-size:22px"></i>Add</button>
+  {% for item in cart %}
+                {% with prod=item.post %} 
+                             {% if prod.id == po.id %}
+<button onclick="event.preventDefault()"style="" type="submit" value="Update" class="btn btn-warning mb-3 sub shad" ><i class="fas fa-check-circle" style="color: green; font-size:22px"></i>On Cart</button>
+<script>
+         $(document).ready(function(){
+
+  
+  var tv= $('#formi{{forloop.parentloop.counter}}').closest('div').find('.formos');
+  tv.hide();
+
+});
+
+</script>     
+
+                                      {% endif %}
+                           {% endwith %}
+               {% endfor %}
+      {% else %}
+<button id="{{po.id}}" style="" type="submit" value="Update" class="btn btn-warning mb-3 sub shad formos"><i class="fas fa-cart-plus" style="font-size:22px"></i>Add</button>
+
+  {% endif %}
+
+      <button data-toggle="modal" data-target="#exampleModalCenter" id="{{po.id}}" style=" display: inline-block;margin-bottom: 1.2rem;"  type="button" class="btn btn-warning  sub  modo shad " > <i style="font-size: 20px;" class="fas fa-money-check-alt" ></i> Buy one</button>
+
+</form>
+{% if request.user.profile.name and request.user.profile.phone  and request.user.profile.zipcode %}
+
+
+
+<form  class="buy"  id="faso{{forloop.counter}}" action="{% url "ecom:one_order" po.id 'empty' 'empty' %}" method="POST">
+  {% csrf_token %}
+      </form>
+
+      {% else %}
+           
+            {% endif %}
+</div>
+
+       </div>
+
+
+
+<div class="remov animated zoomIn"  >
+     <form id="rem{{po.id}}" class="wish2 " method="POST" action="/remove_wish/{{po.id}}">
+                      {% csrf_token %}
+            <input type="hidden" name="supporttype" />
+                    <button  style="height: 60px;width: 60px; border-radius: 50%;padding: 0;" class="remove1 shad btn  " type="submit">
+          <i style="padding: 0;color:red;font-size: 35px;" class="fas fa-times-circle"></i> </button> 
+  </form>
+
+
+
+          </div>
+     </div>
+</div>
+
+{%endfor%}
+
+</div><!-- end wished -->
+
+<style>
+  .ono, .fono{
+    font-weight: 600;
+    font-size: 17px;
+
+  }
+  .fono{
+    font-size: 22px;
+    font-weight: bold;
+  }
+  .onimg{
+    height: 150;
+    width:150; 
+     }
+
+.owl-prev i, .owl-next i {transform : scale(2,9); color:#959fb3;}
+.i{
+ /* background-color: #e8e8e8;*/
+  height: 250px;
+  margin-right: 
+}
+
+ .owl-prev {
+    width: 25px;
+    height: 70px;
+    position: absolute;
+    top: 25%;
+    margin-right: 0px;
+    display: block !important;
+    border:0px solid black;
+}
+
+.owl-next {
+    width: 250px;
+    height: 70px;
+    position: absolute;
+    top: 25%;
+    right: 0px;
+    display: block !important;
+    
+} 
+.orders{
+
+}
+.fa-star{
+  font-size: 35px;
+}
+.checked{
+  color: orange;
+} 
+.feedback{
+      background-color: #ffffff00;
+    border-top-style: hidden;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-color: #0c0c0c;
+    height: 50px;
+    width: 200px;
+}
+.reta input:focus, textarea:focus, select:focus {
+    outline-offset: 0px;
+    border-color: black!important;
+    outline-color: #ffffff00;
+}
+.perfeed{
+  font-size: 20px;
+  font-weight: 500;
+
+}
+.perfeeded{
+  font-size: 22px;
+  font-weight: 500;
+  font-family: 'ZCOOL QingKe HuangYou',;
+
+}
+.imgord {
+  display: none;
+}
+</style>            
+<div class="orders">
+
+{% for po in my_orders %}
+
+<hr>
+
+ <div  style="  padding-bottom: 5px;    background-color: #e6e6e6;" class="container  order_{{po.id }}">
+<h3 style="    background-color: #b9b9b9; font-family: 'Luckiest Guy',;"> Order Id-{{po.id }}</h3>
+<input type="hidden"  name = "order_id" value="{{po.id }}">
+
+<div  class="row">
+
+ {% if po.id == None %}  
+
+ <style>
+   .order_{{po.id }} {
+    display: none;
+   }
+ </style>
+{% else %}
+ <style>
+   .order_{{po.id }}{
+    display: block;
+   }
+ </style>
+ {% endif %}              
+
+               
+<button id="{{po.id }}" style="height: 62px;width: 62px; border-radius: 50%;"  class="btn shad delete_order animated zoomIn"  data-toggle="modal" data-target="#myModal"><i style="padding: 0;color:red;font-size: 35px; " class="fas fa-times-circle"></i></button>
+
+  <div   class="col-md-3 mt-2 ml-2  an animated">
+
+
+  {% if po.paid == True %}
+  <h1>Paid {{po.get_total_cost}}</h1>
+<img style="height: 100px;padding-bottom: 10px;" src="/static/img/paid.png" alt="">
+
+  {%else%}
+  <h2 style="border-style: solid;
+    border-color: red; font-family: 'Luckiest Guy',;">Not Paid</h2>
+<a href="{% url "ecom:retry_payment" po.id  %}"><button class="shad btn btn-success">Retry Payment</button></a>
+
+
+<img style="height: 100px;" src="/static/img/eshtkjo.svg" alt="">
+  {%endif%}
+      {% if po.paid == False %}
+    <p>In 3 days this order will be deleted if is not paid </p>
+{% endif %}
+  </div>
+  <div class="col-md-8  anu animated">
+    <p> <span class="ono"> {% if po.paid == True %}
+Products bought !
+  {%else%}
+  Products to buy !
+{% endif %}
+</span> <span class="fono">[ {{po.items.count}} ]</span> </p> 
+   
+    <p><span class="ono">Pruchase Time</span> <span class="fono">{{po.order_time}}</span></p>
+
+
+    <button class="shad btn shord">Show Products</button>
+  </div>
+</div>
+<div class="container imgord ">
+  
+    
+
+  
+    {% for ite in po.items.all %}
+
+    <div style="
+    background-color: white;" class="row  text-center">
+      <div class="col-md-4 text-center">
+<a href="{{ite.product.get_absolute_url}}">
+      <img   src="{{ite.product.photo.url}}" class=" onimg   mt-2 " ></a>
+      </div>
+      <div class="col-md-8">
+        
+        <h3>{{ite.product.title}}</h3> 
+
+
+{% if po.paid == True %}
+{% for rated in ite.rated.rate_items.all %}
+  
+<script type="text/javascript">
+  $(document).ready(function($) {
+
+var nn= $('#rat'+'{{ rated.rated.rate}}').attr('id');
+$('#rat'+'{{ rated.rated.rate}}').children('span').slice(0, '{{ rated.rated.rate}}').addClass('checked');
+    
+ 
+  });
+
+  </script>
+<p class="perfeeded">Bought ({{rated.quantity}} 
+
+{% if rated.color %}
+/{{rated.color}}
+{% endif %}
+{% if rated.extra %}
+/{{rated.extra}}
+{% endif %}
+) for {{rated.product.price|mul:rated.quantity}}$</p>
+<hr>
+
+<p class="perfeed">{{rated.rated.feedback}}</p>
+<hr>
+ <form id="rate{{rated.id}}" action="{% url "ecom:rate" rated.rated.id  %}" class="reta"  method="POST" >
+        
+  {% csrf_token %}
+       
+<div  class="rate" val='{{ rated.rated.rate}}' id="rat{{ rated.rated.rate}}">
+  
+  <span class="fa fa-star  " data-value='1'></span>
+  <span class="fa fa-star " data-value='2'></span>
+  <span class="fa fa-star " data-value='3'></span>
+  <span class="fa fa-star" data-value='4'></span>
+  <span class="fa fa-star" data-value='5'></span>
+
+</div>
+    <input maxlength="300" placeholder="Your Feedback max-300 characters" class="feedback text-center" type="text" name = "feedback">
+    
+    <input type="hidden" class="the_rate" name = "star" value="2">
+  
+
+
+        <button class="btn shad ml-2 feedbut" type="submit" name="rate"> Add feedback </button>  
+  </form>
+          {% endfor %}
+           {% else %}
+           <p style="font-size: 17px;font-weight: 500;">Pay this order to add feedback</p>
+
+ {% endif %}
+    
+
+
+
+      </div>
+
+    </div>
+
+
+    <hr>
+      {% endfor %}
+
+
+
+
+</div>
+</div>
+
+{%endfor%}
+</div>
+ <hr >
+<script type="text/javascript">
+  $(document).ready(function($) {
+
+
+$('.feedbut').each(function() {
+
+    $(this).click(function(event){
+    event.preventDefault();
+    var formid=$(this).parent('form').attr('id');
+    var mydata=$('#'+formid).serialize();
+    var myurl=$('#'+formid).attr('action') || window.location.href;
+    var the_new_feed = $(this).parent('form').find('.feedback').val()
+    $(this).closest('div').find('.perfeed').text(the_new_feed)
+  console.log(the_new_feed)
+  $.ajax({
+                method:'GET',
+                url: myurl,                
+                data:mydata,
+
+         dataType: 'json',
+        success: function (data) {
+          if (data.message) {
+            //alert(data.message);
+          }
+        }
+
+
+
+
+              
+            });
+        
+
+        });
+
+  });
+
+
+
+
+$('.feedback').on('focus', $(this), function(event) {
+
+$(this).addClass('shad');
+$(this).animate({
+   //paddingBottom: '5%',
+    width:'55%'
+});
+$(this).closest('div').find('.fa-star').addClass('animated bounceIn ')
+});
+
+
+$('.feedback').focusout(function(event) {
+  $(this).removeClass('shad');
+  $(this).width(170)
+  $(this).closest('div').find('.fa-star').removeClass('animated bounceIn')
+});
+
+
+var r= $('.fa-star')
+var checked=$('.checked')
+$('.fa-star').click(function(event) {
+
+    var td_indx=$(this).index()
+    var clasd=$(this).parent('div').children('span').slice(td_indx,5)
+    var vegh=$(this).parent('div').children('span').slice(0,td_indx+1)
+    var value_to=  parseInt(vegh.length)
+   $(this).parent('div').parent('form').find('.the_rate').val(value_to)
+    clasd.removeClass('checked');
+    
+    console.log(value_to)
+});
+
+$('.checked').click(function() {
+
+});
+
+r.click(function(event) {
+  var t_indx=$(this).index()
+  var cla=$(this).parent('div').children('span').slice(0, t_indx+1)
+    cla.addClass('checked animated bounceIn');
+    setTimeout(function(){cla.removeClass(' bounceIn'); }, 1000);
+});
+
+
+r.hover(function() {
+  var t_ind=$(this).index()
+  var clau=$(this).parent('div').children('span').slice(0, t_ind+1)
+    clau.addClass('che');
+}, function() {
+  var t_indb=$(this).index()
+  var claub=$(this).parent('div').children('span').slice(0, t_indb+1)
+    claub.removeClass('che');
+});
+//console.log(feedb)
+
+  });
+  
+</script>
+ 
+   </div><!-- end orders -->
+       
+   
+</div>  <!-- end row -->
+
+
+<script type="text/javascript">
+
+
+
+
+
+
+
+
+  $(document).ready(function($) {
+
+
+$('.delete_order').each(function(event) {
+  $(this).click(function(event) {
+         
+
+     var ord_id=$(this).attr('id');
+     $('#delete_order').attr('action', '/delete-order'+ '/'+ ord_id );
+    
+     $('#delete_order').find('.bu_ord').attr('id', ord_id);
+    
+
+     
+  });
+});
+
+    $('.dele_order').each(function() {
+
+      $(this).click(function(event){
+
+    event.preventDefault();
+
+var hides= $(this).find('.bu_ord').attr('id');
+   $('.order_'+hides).hide();
+
+    var mydata=$(this).serialize();
+    var myurl= $(this).attr('action') || window.location.href;
+  $.ajax({
+                method:'POST',
+                url: myurl,                
+                data:mydata,
+              
+          });
+               
+
+         console.log(hides)
+        });
+      });
+
+
+      $('.bu_ord').click(function(event){
+
+var hides= $(this).attr('id');
+   $('.order_'+hides).hide();
+
+      });
+$('.bu_ord').click(function(event) {
+          var lim = $('#order_count').text();
+          var lism_int = parseInt(lim);
+
+          $('#order_count').text( lism_int - 1);
+});
+
+
+$('.fa-star').click(function(event) {
+  //$(this).toggleClass('checked');
+});
+
+   $('.shord').click(function(event) {
+   $(this).parent('div').parent('div').parent('div').find('.imgord').toggle('slow');
+   $(this).text($(this).text() == 'Hide Products' ? 'Show Products' : 'Hide Products');
+   });
+      
+      $('.modo').click(function(event){
+   $('.fade').addClass('animated zoomIn')
+
+   
+      var modal_id=$(this).attr('id');
+     var src = $('#div'+modal_id).find('.img-fluid').attr('src')
+     var title = $('#div'+modal_id).find('.titl').attr('id')
+     var price = $('#div'+modal_id).find('.img-fluid').attr('id')
+         $('#image').attr('src', src);
+      var srcs =  $(this).closest('div').find('.buy').attr('action');
+      $('#mform').attr('action', srcs);
+      $('#item_price').text( 'Price '+ price+'$').css({'font-weight': 'bold',
+        'border-style':'solid','padding':'5px'});
+      $('#title_m').text( 'Buying  '+ title );
+     console.log(title)
+
+               });
+     
+  
+  });
+   
+ </script>
+
+
+<!-- Modal -->
+<div  class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="title_m" class="modal-title" id="exampleModalLongTitle">Bying </h5>
+        <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="far fa-times-circle"></i>
+        </button>
+
+
+        
+      </div>
+      <div class="modal-body">
+
+  <img id="image" style="height: 200px;margin-left: auto;margin-right: auto; display: block; " class="img-fluid sva   shad   " alt="Responsive image" style=" box-shadow:10px 10px 5px #00000054;  " src="" >
+
+
+<div class="row">
+  
+<style>
+  table label{
+    padding:0px 20px 0px 10px;
+  }
+</style>
+  <div class="col-8 mt-5">
+    <h4 >Your shipping address <i class="fas fa-map-marked-alt"></i></h4>
+    <hr>
+    <table  class=" shad  ">
+<tr><th><label for="id_name">Name:</label></th><td>{{request.user.profile.name|capfirst }}</td></tr>
+<tr><th><label for="id_last_name">Last name:</label></th><td>{{request.user.profile.last_name|capfirst }}</td></tr>
+<tr><th><label for="id_birth_date">Birth date:</label></th><td>{{request.user.profile.birth_date }}</td></tr>
+<tr><th><label for="id_location">Location:</label></th><td>{{request.user.profile.location }}</td></tr>
+<tr><th><label for="id_zipcode">Zipcode:</label></th><td>{{request.user.profile.zipcode }}</td></tr>
+<tr><th><label for="id_phone">Phone:</label></th><td>{{request.user.profile.phone }}</td></tr>
+
+
+
+  </table>
+
+</div>
+<div class="col-4 ">
+  <span style="position:absolute; margin-top: 15rem!important;" id="item_price"></span>
+</div>
+</div>
+
+
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary shad" data-dismiss="modal">Cancel</button>
+        <form   id="mform" action="" method="POST">
+  {% csrf_token %}
+  
+
+
+  <button  name="one_order"  "  class="btn btn-warning  sub shad" ><i style="color: blue" class="fab fa-paypal"></i> Buy  </button>
+
+
+
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">You are about to delete an order  </h4>
+          <button type="button" class="close" data-dismiss="modal"><i style="color:red;font-size: 25px; " class="fas fa-times-circle"></i></button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <p>Are you sure yuu want to delete this order permanetly ?</p>
+              
+                <p>Your Feedbacks won`t be deleted!</p>
+              <p>You won`t be able to track your payments.</p>
+
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+              <form id="delete_order" class="dele_order w-100" method="POST" action="">
+                      {% csrf_token %}
+         <button style="float: right;" data-dismiss="modal" id="" type="submit" for="dele_order" class="btn btn-danger bu_ord" >Delete <i class="fas fa-trash-alt"></i></button>
+                  
+                 
+  </form>
+<button  data-dismiss="modal" id="" class="btn btn-danger " > Cancel </button>
+                  
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+   <script type="text/javascript" src= "{% static "js/profile.js" %}" ></script> 
+
+  
+
+{%endblock%}
+
+
